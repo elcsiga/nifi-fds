@@ -1048,6 +1048,7 @@ FdsDemo.prototype = {
 FdsDemo.annotations = [
     new Component({
         templateUrl: './fds-demo.html',
+        selector: 'fds-demo',
         animations: [FdsAnimations.slideInLeftAnimation],
         host: {
             '[@routeAnimation]': 'routeAnimation'

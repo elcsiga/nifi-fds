@@ -42,6 +42,8 @@ if (!locale || locale === 'en-us') {
 } else { //load the translation providers and bootstrap the module
     var translationFile = './webapp/locale/messages.' + locale + '.xlf';
 
+    platformBrowserDynamic().bootstrapModule(FdsModule, {providers: providers});
+    
     $.ajax({
         url: translationFile,
         dataType: 'text'

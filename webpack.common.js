@@ -89,10 +89,10 @@ module.exports = {
         }),
 
         // Create HTML files to serve your webpack bundles
-        new HtmlWebpackPlugin({
-            template: 'webapp/template.html',
-            filename: 'index.html'
-        }),
+        // new HtmlWebpackPlugin({
+        //     template: 'webapp/template.html',
+        //     filename: 'index.html'
+        // }),
 
         new CompressionPlugin({
             algorithm: 'gzip',

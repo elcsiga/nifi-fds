@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { NgModule } from '@angular/core';
+import { NgModule, Injector  } from '@angular/core';
 import { FdsCoreModule } from '@nifi-fds/core';
 import FdsRoutes from 'webapp/fds.routes.js';
 import Fds from 'webapp/fds.js';
@@ -23,7 +23,13 @@ import FdsDemo from 'webapp/components/flow-design-system/fds-demo.js';
 import FdsDemoDialog from 'webapp/components/flow-design-system/dialogs/demo/fds-demo-dialog.js';
 import FdsService from 'webapp/services/fds.service.js';
 
-function FdsModule() {
+import { createCustomElement } from '@angular/elements';
+let inj;
+function FdsModule(injector) {
+    this.injector = injector;
+
+    inj = injector;
+    console.log ('injector', injector);
 }
 
 FdsModule.prototype = {
@@ -42,13 +48,27 @@ FdsModule.annotations = [
             FdsDemoDialog
         ],
         entryComponents: [
+            Fds,
             FdsDemoDialog
         ],
         providers: [
             FdsService
         ],
-        bootstrap: [Fds]
+        bootstrap: []
     })
 ];
 
+FdsModule.parameters = [
+    Injector
+];
+
+FdsModule.prototype.ngDoBootstrap =  () => {
+    console.log('HELLO ngDoBootstrap');
+    const e = createCustomElement(Fds, {  
+        injector: inj  
+    });  
+    if (!customElements.get('fds-web-component')) {  
+        customElements.define('fds-web-component', e);  
+    }  
+} 
 export default FdsModule;

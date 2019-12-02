@@ -24,11 +24,13 @@ limitations under the License.
         <mat-toolbar id="fds-toolbar">
             <!-- <img id="fds-logo" src="fds/images/fds-logo-web-app.svg"> -->
             <div *ngIf="fdsService.perspective !== 'login' && fdsService.perspective !== 'not-found'" fxFlex="1 1 auto" class="pad-left-xl" [@flyInOut]="fdsService.breadCrumbState">
-                <span class="pointer">{{fdsService.title}}</span>
+                <span class="pointer">{{fdsService.title} {{counter}}}</span>
+
+                <button (click)="emitter.emit()">PRESS ME</button>
             </div>
         </mat-toolbar>
         <div id="fds-perspectives-container">
-            <router-outlet></router-outlet>
+            <fds-demo></fds-demo>
         </div>
     </div>
 </mat-sidenav-container>
